@@ -1,0 +1,72 @@
+#define trig_Pin 8
+#define echo_Pin 9
+long mesafe =0;
+long sure = 0;
+void setup()
+{
+  for ( int i=2; i<7; i++)
+  {
+    pinMode(i,OUTPUT);
+  }
+  pinMode(trig_Pin,OUTPUT);
+  pinMode(echo_Pin,INPUT);
+  Serial.begin(9600);
+  
+}
+void loop()
+{
+  digitalWrite(trig_Pin,HIGH);
+  delayMicroseconds(1000);
+  digitalWrite(trig_Pin,LOW);
+  sure= pulseIn (echo_Pin,HIGH);
+  mesafe=(sure/29.1)/2;
+  if (mesafe>300)
+  mesafe=300;
+  Serial.print("Olculen Mesafe =");
+  Serial.print(mesafe);
+  Serial.print ("cm");
+  delay(100);
+  if(mesafe>0&&mesafe<=10)
+  {
+    digitalWrite(2,HIGH);
+    digitalWrite(3,LOW);
+    digitalWrite(4,LOW);
+    digitalWrite(5,LOW);
+    digitalWrite(6,LOW);
+  }
+  else if(mesafe> 10&&mesafe<=20)
+  {
+    digitalWrite(2,HIGH);
+    digitalWrite(3,HIGH);
+    digitalWrite(4,LOW);
+    digitalWrite(5,LOW);
+    digitalWrite(6,LOW);
+  }
+  else if (mesafe>20&&mesafe<=30)
+  {
+    digitalWrite(2,HIGH);
+    digitalWrite(3,HIGH);
+    digitalWrite(4,HIGH);
+    digitalWrite(5,LOW);
+    digitalWrite(6,LOW);
+
+   
+  }
+  else if(mesafe>30&&mesafe<=40)
+  {
+    digitalWrite(2,HIGH);
+    digitalWrite(3,HIGH);
+    digitalWrite(4,HIGH);
+    digitalWrite(5,HIGH);
+    digitalWrite(6,LOW);
+  }
+  
+  else 
+  {
+    digitalWrite(2,HIGH);
+    digitalWrite(3,HIGH);
+    digitalWrite(4,HIGH);
+    digitalWrite(5,HIGH);
+    digitalWrite(6,HIGH);
+  }
+}
